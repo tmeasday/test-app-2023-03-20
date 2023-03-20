@@ -4,10 +4,12 @@ import { Button } from './Button';
 
 const Wrapper = (storyFn) => {
   useEffect(() => {
-    const logOnResize = () => {
+    const logSize = (event) => () => {
       const logDiv = document.querySelector("#resize-log");
-      logDiv.innerHTML += `Resized to ${window.innerWidth} / ${window.innerHeight} <br />`;
+      logDiv.innerHTML += `${new Date()} ${event}: ${window.innerWidth} / ${window.innerHeight} <br />`;
     };
+    const logOnResize = logSize('Resize')
+    logSize('Start')();
     window.addEventListener("resize", logOnResize);
     return () => {
       window.removeEventListener("resize", logOnResize);
